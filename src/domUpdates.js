@@ -15,6 +15,8 @@ const recipePage = document.getElementById("recipe-page");
 const searchInput = document.querySelector(".search-bar input");
 const submitButton = document.getElementById("submitButton");
 const tagsContainer = document.querySelector('.tags');
+const showAllRecipesBtn = document.querySelector('.show-all-btn');
+const recipeCard = document.querySelector('.recipe-card');
 
 // Event listeners
 
@@ -29,6 +31,18 @@ tagsContainer.addEventListener('click', function(event){
 
 document.addEventListener("DOMContentLoaded", function () {
   setupSubmitButtonListener();
+});
+
+showAllRecipesBtn.addEventListener('click', function () {
+  goBackToMain();
+});
+
+
+resultsContainer.addEventListener('click', function (event) {
+  console.log(event.target.parentNode);
+    const clickedRecipeId = event.target.parentNode.dataset.recipeId;
+  console.log(clickedRecipeId);
+  showRecipePage(clickedRecipeId);
 });
 
 // document
@@ -77,6 +91,7 @@ function updateResultsContainer(recipes) {
 }
 
 function createRecipeCard(recipe) {
+
   const recipeCard = document.createElement("div");
   recipeCard.classList.add("recipe-card");
 
@@ -89,11 +104,10 @@ function createRecipeCard(recipe) {
   title.textContent = recipe.name;
   recipeCard.appendChild(title);
 
-  recipeCard.addEventListener("click", () => {
-    showRecipePage(recipe);
-  });
-
+  recipeCard.dataset.recipeId = recipe.id
+ 
   return recipeCard;
+
 }
 
 function displayFilterByTag(event) {
