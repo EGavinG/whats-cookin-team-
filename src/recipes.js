@@ -54,7 +54,12 @@ function getIngredientProperty(ingredientId, ingredientsData, property) {
 function getRecipeDirections(recipe) {
   return recipe.instructions;
 }
-module.exports = {
+
+export {
   filterRecipesByTag,
-  filterRecipesByName, getIngredientNames, calculateRecipeCost, getRecipeDirections, getIngredientProperty
-}
+  filterRecipesByName,
+  getIngredientNames,
+  calculateRecipeCost,
+  getRecipeDirections,
+  getIngredientProperty,
+};

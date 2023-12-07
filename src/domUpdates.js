@@ -9,11 +9,47 @@ import {
 
 import recipeData from "./data/recipes";
 import ingredientsData from "./data/ingredients";
+// Query Selectors
+const tagsContainer = document.querySelector('.tags');
+const resultsContainer = document.querySelector(".results-container");
+const recipePage = document.getElementById("recipe-page");
+const element = document.querySelector(`.${className}`);
+const searchInputValue = document.getElementById("searchInput").value;
+// Event listeners
+tagsContainer.addEventListener('click', function(event){
+  displayFilterByTag(event)
+});
 
+document.querySelector(".search-bar input").addEventListener("input", () => {
+  updateFilteredResults(recipeData);
+});
+
+document.querySelectorAll(".tags a").forEach((tag) => {
+  tag.addEventListener("click", () => {
+    tag.classList.toggle("selected");
+    updateFilteredResults(recipeData);
+  });
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+  setupSubmitButtonListener();
+});
 // DOM manipulation functions
+
+
+function displayFilterByTag(event) {
+    const clickedTag = event.target.closest('.tag-btn')
+    console.log(clickedTag.id);
+    if(clickedTag) {
+      const tag = clickedTag.id
+      console.log(tag);
+    // const filteredRecipesByTag = filterRecipesByTag(recipeData, tag)
+    // showAllRecipes(filterRecipesByTag)
+    }
+}
+
 function showAllRecipes(recipes) {
-  const resultsContainer = document.querySelector(".results-container");
-  const recipePage = document.getElementById("recipe-page");
+
 
   recipes.forEach((recipe, index) => {
     const recipeCard = createRecipeCard(recipe);
@@ -22,7 +58,7 @@ function showAllRecipes(recipes) {
 }
 
 function showRecipePage(recipe) {
-  const recipePage = document.getElementById("recipe-page");
+ 
   recipePage.innerHTML = `
     <h1>${recipe.title}</h1>
     <img src="${recipe.image}" alt="${recipe.title}">
@@ -40,7 +76,7 @@ function updateFilteredResults(recipes) {
 }
 
 function updateResultsContainer(recipes) {
-  const resultsContainer = document.querySelector(".results-container");
+  
   resultsContainer.innerHTML = "";
 
   recipes.forEach((recipe) => {
@@ -73,36 +109,20 @@ function createRecipeCard(recipe) {
   return recipeCard;
 }
 
-// Event listeners
-document.querySelector(".search-bar input").addEventListener("input", () => {
-  updateFilteredResults(recipeData);
-});
-
-document.querySelectorAll(".tags a").forEach((tag) => {
-  tag.addEventListener("click", () => {
-    tag.classList.toggle("selected");
-    updateFilteredResults(recipeData);
-  });
-});
-
-document.addEventListener("DOMContentLoaded", function () {
-  setupSubmitButtonListener();
-});
-
 function setupSubmitButtonListener() {
   const submitButton = document.getElementById("submitButton");
   submitButton.addEventListener("click", search);
 }
 
 function search() {
-  const searchInput = document.getElementById("searchInput").value;
-  filterRecipesByName(searchInput);
-  displayResults(searchInput);
+  
+  filterRecipesByName(searchInputValue);
+  displayResults(searchInputValue);
 }
 
 // Helper Functions
 function toggleHiddenClass(className) {
-  const element = document.querySelector(`.${className}`);
+ 
   if (element) {
     element.classList.toggle("hidden");
   }
@@ -113,4 +133,4 @@ function goBackToMain() {
   toggleHiddenClass("result-page");
 }
 
-export { showAllRecipes, updateFilteredResults };
+export { showAllRecipes, updateFilteredResults, displayFilterByTag };
