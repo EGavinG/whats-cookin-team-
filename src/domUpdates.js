@@ -13,7 +13,6 @@ import ingredientsData from "./data/ingredients";
 const tagsContainer = document.querySelector('.tags');
 const resultsContainer = document.querySelector(".results-container");
 const recipePage = document.getElementById("recipe-page");
-const element = document.querySelector(`.${className}`);
 const searchInputValue = document.getElementById("searchInput").value;
 // Event listeners
 tagsContainer.addEventListener('click', function(event){
@@ -122,6 +121,7 @@ function search() {
 
 // Helper Functions
 function toggleHiddenClass(className) {
+  const element = document.querySelector(`.${className}`);
  
   if (element) {
     element.classList.toggle("hidden");
