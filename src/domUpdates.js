@@ -14,33 +14,36 @@ const resultsContainer = document.querySelector(".results-container");
 const recipePage = document.getElementById("recipe-page");
 const searchInput = document.querySelector(".search-bar input");
 const submitButton = document.getElementById("submitButton");
-const tagsContainer = document.querySelector('.tags');
-const showAllRecipesBtn = document.querySelector('.show-all-btn');
-const recipeCard = document.querySelector('.recipe-card');
+const tagsContainer = document.querySelector(".tags");
+const showAllRecipesBtn = document.querySelector(".show-all-btn");
+const recipeCard = document.querySelector(".recipe-card");
+const homeButton = document.getElementById("home-button");
 
 // Event listeners
 
-submitButton.addEventListener("click", function (){
+homeButton.addEventListener("click", function () {
+  goBackToMain();
+});
+
+submitButton.addEventListener("click", function () {
   search();
 });
 
-tagsContainer.addEventListener('click', function(event){
-  displayFilterByTag(event)
+tagsContainer.addEventListener("click", function (event) {
+  displayFilterByTag(event);
 });
-
 
 document.addEventListener("DOMContentLoaded", function () {
   setupSubmitButtonListener();
 });
 
-showAllRecipesBtn.addEventListener('click', function () {
+showAllRecipesBtn.addEventListener("click", function () {
   goBackToMain();
 });
 
-
-resultsContainer.addEventListener('click', function (event) {
+resultsContainer.addEventListener("click", function (event) {
   console.log(event.target.parentNode);
-    const clickedRecipeId = event.target.parentNode.dataset.recipeId;
+  const clickedRecipeId = event.target.parentNode.dataset.recipeId;
   console.log(clickedRecipeId);
   showRecipePage(clickedRecipeId);
 });
@@ -64,7 +67,6 @@ function showAllRecipes(recipes) {
 }
 
 function showRecipePage(recipe) {
-  
   recipePage.innerHTML = `
     <h1>${recipe.title}</h1>
     <img src="${recipe.image}" alt="${recipe.title}">
@@ -72,7 +74,6 @@ function showRecipePage(recipe) {
 }
 
 function updateFilteredResults(recipes) {
- 
   const tags = Array.from(document.querySelectorAll(".tags a"))
     .filter((tag) => tag.classList.contains("selected"))
     .map((tag) => tag.innerText);
@@ -81,7 +82,6 @@ function updateFilteredResults(recipes) {
 }
 
 function updateResultsContainer(recipes) {
-  
   resultsContainer.innerHTML = "";
 
   recipes.forEach((recipe) => {
@@ -91,7 +91,6 @@ function updateResultsContainer(recipes) {
 }
 
 function createRecipeCard(recipe) {
-
   const recipeCard = document.createElement("div");
   recipeCard.classList.add("recipe-card");
 
@@ -104,23 +103,22 @@ function createRecipeCard(recipe) {
   title.textContent = recipe.name;
   recipeCard.appendChild(title);
 
-  recipeCard.dataset.recipeId = recipe.id
- 
-  return recipeCard;
+  recipeCard.dataset.recipeId = recipe.id;
 
+  return recipeCard;
 }
 
 function displayFilterByTag(event) {
-  const clickedTag = event.target.closest('.tag-btn')
+  const clickedTag = event.target.closest(".tag-btn");
   console.log(clickedTag.id);
-  if(clickedTag) {
-    const tag = clickedTag.id
+  if (clickedTag) {
+    const tag = clickedTag.id;
     console.log(tag);
-  const filteredRecipesByTag = filterRecipesByTag(recipeData, tag)
-  console.log(filteredRecipesByTag);
-  updateResultsContainer(filteredRecipesByTag);
-  goBackToMain();
-  // showAllRecipes(filterRecipesByTag)
+    const filteredRecipesByTag = filterRecipesByTag(recipeData, tag);
+    console.log(filteredRecipesByTag);
+    updateResultsContainer(filteredRecipesByTag);
+    goBackToMain();
+    // showAllRecipes(filterRecipesByTag)
   }
 }
 
