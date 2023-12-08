@@ -9,10 +9,14 @@ import usersData from "./data/users";
 
 // Function Imports
 import { filterRecipesByTag, filterRecipesByName } from "./recipes";
-import { showAllRecipes, updateFilteredResults } from "./domUpdates";
+import {
+  showAllRecipes,
+  showRecipePage,
+  updateFilteredResults,
+  getRecipeById,
+} from "./domUpdates";
 
 // OnLoad Function Invokation
 window.addEventListener("load", function () {
   showAllRecipes(recipeData);
-
 });

@@ -116,6 +116,53 @@ li a {
   margin-bottom: 10px;
 }
 
+.recipe-page {
+  max-width: 800px;
+  margin: 0 auto;
+  background-color: #fff;
+  color: #333;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.recipe-page img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.recipe-page h1 {
+  font-size: 28px;
+  margin-bottom: 10px;
+  color: #2e5d95;
+}
+
+.recipe-page h4 {
+  font-size: 18px;
+  margin-bottom: 10px;
+  color: #2e5d95;
+}
+
+.recipe-page ul,
+.recipe-page ol {
+  margin-bottom: 20px;
+}
+
+.recipe-page li {
+  font-size: 16px;
+  margin-bottom: 8px;
+}
+
+.recipe-page h3 {
+  font-size: 22px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  color: #2e5d95;
+}
+
 #home-link {
   display: flex;
   flex-direction: row-reverse;

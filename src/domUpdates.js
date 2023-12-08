@@ -9,15 +9,19 @@ import {
 
 import recipeData from "./data/recipes";
 import ingredientsData from "./data/ingredients";
+
 // Query Selectors
 const resultsContainer = document.querySelector(".results-container");
-const recipePage = document.getElementById("recipe-page");
+const recipePage = document.querySelector(".recipe-page");
 const searchInput = document.querySelector(".search-bar input");
 const submitButton = document.getElementById("submitButton");
 const tagsContainer = document.querySelector(".tags");
 const showAllRecipesBtn = document.querySelector(".show-all-btn");
 const recipeCard = document.querySelector(".recipe-card");
 const homeButton = document.getElementById("home-button");
+const recipeContainer = document.querySelector(".recipe-container");
+const mainContainer = document.querySelector(".main-container");
+const resultPage = document.querySelector(".result-page");
 
 // Event listeners
 
@@ -33,20 +37,26 @@ tagsContainer.addEventListener("click", function (event) {
   displayFilterByTag(event);
 });
 
-document.addEventListener("DOMContentLoaded", function () {
-  setupSubmitButtonListener();
-});
-
 showAllRecipesBtn.addEventListener("click", function () {
-  goBackToMain();
+  goToResultsPage();
 });
 
 resultsContainer.addEventListener("click", function (event) {
-  console.log(event.target.parentNode);
-  const clickedRecipeId = event.target.parentNode.dataset.recipeId;
-  console.log(clickedRecipeId);
-  showRecipePage(clickedRecipeId);
+  const clickedRecipeCard = event.target.closest(".recipe-card");
+  if (clickedRecipeCard) {
+    const clickedRecipeId = clickedRecipeCard.dataset.recipeId;
+    const clickedRecipe = getRecipeById(clickedRecipeId);
+    showRecipePage(clickedRecipe);
+  }
 });
+
+function getRecipeById(id) {
+  return recipeData.find((recipe) => recipe.id === parseInt(id));
+}
+
+function getIngredientById(id) {
+  return ingredientsData.find((ingredient) => ingredient.id === parseInt(id));
+}
 
 // document
 //   .querySelector(".search-bar form")
@@ -67,10 +77,30 @@ function showAllRecipes(recipes) {
 }
 
 function showRecipePage(recipe) {
-  recipePage.innerHTML = `
-    <h1>${recipe.title}</h1>
-    <img src="${recipe.image}" alt="${recipe.title}">
+  const ingredientsList = recipe.ingredients
+    .map(
+      (ingredient) =>
+        `<li>${getIngredientById(ingredient.id).name} (${
+          ingredient.quantity.amount
+        } ${ingredient.quantity.unit})</li>`
+    )
+    .join("");
+
+  const directionsList = recipe.instructions
+    .map((instruction) => `<li>${instruction.instruction}</li>`)
+    .join("");
+
+  recipeContainer.innerHTML = `
+    <section class="recipe-page">
+      <img src="${recipe.image}" alt="${recipe.name}" />
+      <h1>${recipe.name}</h1>
+      <h4 class="ingredients">Ingredients:</h4>
+      <ul>${ingredientsList}</ul>
+      <h3 class="directions">Directions:</h3>
+      <ol>${directionsList}</ol>
+    </section>
   `;
+  goToRecipePage();
 }
 
 function updateFilteredResults(recipes) {
@@ -117,8 +147,7 @@ function displayFilterByTag(event) {
     const filteredRecipesByTag = filterRecipesByTag(recipeData, tag);
     console.log(filteredRecipesByTag);
     updateResultsContainer(filteredRecipesByTag);
-    goBackToMain();
-    // showAllRecipes(filterRecipesByTag)
+    goToResultsPage(); // showAllRecipes(filterRecipesByTag)
   }
 }
 
@@ -126,7 +155,7 @@ function search() {
   const searchInputValue = document.getElementById("searchInput").value;
   const filteredRecipes = filterRecipesByName(recipeData, searchInputValue);
   updateResultsContainer(filteredRecipes);
-  goBackToMain();
+  goToResultsPage();
 }
 
 // Helper Functions
@@ -138,8 +167,24 @@ function toggleHiddenClass(className) {
 }
 
 function goBackToMain() {
-  toggleHiddenClass("main-container");
-  toggleHiddenClass("result-page");
+  mainContainer.classList.remove("hidden");
+  resultPage.classList.add("hidden");
+  homeButton.classList.add("hidden");
+  recipePage.classList.add("hidden");
 }
 
-export { showAllRecipes, updateFilteredResults };
+function goToResultsPage() {
+  mainContainer.classList.add("hidden");
+  resultPage.classList.remove("hidden");
+  homeButton.classList.remove("hidden");
+  recipePage.classList.add("hidden");
+}
+
+function goToRecipePage() {
+  mainContainer.classList.add("hidden");
+  resultPage.classList.add("hidden");
+  homeButton.classList.remove("hidden");
+  recipePage.classList.remove("hidden");
+}
+
+export { showAllRecipes, showRecipePage, updateFilteredResults, getRecipeById };
