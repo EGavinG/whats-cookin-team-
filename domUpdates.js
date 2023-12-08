@@ -82,37 +82,38 @@ function showAllRecipes(recipes) {
 }*/
 
 function showRecipePage(recipeId) {
-  console.log("showRecipePage function called? yes");
-  // this should find the recipe
-  console.log("recipeId:", recipeId); //id is being pulled correctly
-  console.log(typeof recipeId)
-  //convert the recipeID to a number. the 10 is base of the numeral system, aka the "radix"
   const convertId = parseInt(recipeId, 10);
-
-  const recipe = recipeData.find(recipe => recipe.id === convertId);
-  console.log("recipe:", recipe);
+  const recipe = recipeData.find((recipe) => recipe.id === convertId);
+console.log(recipe)
   if (!recipe) {
-    return "Recipe not found";
+    console.error("Recipe not found");
+    return;
   }
-  console.log("ayo")
+
   const recipeName = recipe.name;
-  // Use proper property for instructions
-  const instructions = recipe.instructions.map(step => `<li>${step.instruction}</li>`).join('');
-  recipePage.innerHTML = `
+  const recipeImage = recipe.image;
+  const ingredientsList = recipe.ingredients
+    .map(
+      (ingredient) =>
+        `<li>${getIngredientNames(ingredient.id, ingredientsData)} (${ingredient.quantity.amount} ${ingredient.quantity.unit})</li>`
+    )
+    .join('');
+  const instructionsList = recipe.instructions
+    .map((step) => `<li>${step.instruction}</li>`)
+    .join('');
+
+  const recipePageHTML = `
     <section class="recipe-page">
-      <img src="${recipe.image}" alt="${recipeName}">
+      <img src="${recipeImage}" alt="${recipeName}">
       <h1>${recipeName}</h1>
       <h4 class="ingredients">Ingredients:</h4>
-      <ul>
-        ${recipe.ingredients.map(ingredient => `
-          <li>${getIngredientNames(ingredient.id, ingredientsData)} (${ingredient.quantity.amount} ${ingredient.quantity.unit})</li>
-        `).join('')}
-      </ul>
+      <ul>${ingredientsList}</ul>
       <h3 class="directions">Directions:</h3>
-      <ol>
-        ${instructions}
-      </ol>
-    </section>`;
+      <ol>${instructionsList}</ol>
+    </section>
+  `;
+
+  recipePage.innerHTML = recipePageHTML;
 }
 
 
@@ -188,4 +189,4 @@ function goBackToMain() {
   toggleHiddenClass("result-page");
 }
 
-export { showAllRecipes, updateFilteredResults };
+export { showAllRecipes, updateFilteredResults, showRecipePage };
