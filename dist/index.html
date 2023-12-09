@@ -9,9 +9,10 @@
     <title>Hungry?</title>
   </head>
   <body>
-    <button id="home-button" class="home-button hidden">Home</button>
-    <button id="favorites-button" class="favorites-button hidden">Favorite</button>
-    <button id="remove-favorites-button" class="remove-favorites-button hidden">Remove Favorite</button>
+    <button id="home-button" class="nav-button hidden">Home</button>
+    <button id="favorites-button" class="nav-button hidden">Favorite</button>
+    <button id="remove-favorites-button" class="nav-button hidden">Remove Favorite</button>
+    <button id="view-saved-button" class="nav-button hidden">View Saved Recipes</button>
     <div class="main-container">
       <div id="app">
         <h1>Find a Recipe</h1>
@@ -29,29 +30,10 @@
           </div>
           <div class="tags">
             <h2>Tags</h2>
-            <ul>
-              <li>
-                <button type="button" class="tag-btn" id="appetizer">
-                  appetizer
-                </button>
-              </li>
-              <li>
-                <button type="button" class="tag-btn" id="antipasti">
-                  antipasti
-                </button>
-              </li>
-              <li>
-                <button type="button" class="tag-btn" id="lunch">lunch</button>
-              </li>
-              <li>
-                <button type="button" class="tag-btn" id="dinner">
-                  dinner
-                </button>
-              </li>
-              <li>
-                <button type="button" class="tag-btn" id="snack">snack</button>
-              </li>
-            </ul>
+              <button type="button" class="tag-btn" id="appetizer">appetizer</button>
+              <button type="button" class="tag-btn" id="side dish">side dish</button>
+              <button type="button" class="tag-btn" id="main dish">main dish</button>
+              
           </div>
         </div>
         <section class="recipe-carousel">
@@ -73,7 +55,7 @@
     </div>
 
     <div class="result-page hidden">
-      <h1>All Recipes</h1>
+      <h1 class="recipe-label">All Recipes</h1>
       <div class="results-container"></div>
       <section class="filtered-results"></section>
     </div>
@@ -84,9 +66,5 @@
     </div>
     <!-- Do not include the scripts.js file here - it is done automatically by the webpack server -->
     <script src="bundle.js"></script>
-
-    <!-- <div class="show-all">
-      <button id="toggleButton"><h2>Show All Recipes</h2></button>
-    </div> -->
   </body>
 </html>
