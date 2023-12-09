@@ -5,10 +5,14 @@ import {
   getIngredientNames,
   calculateRecipeCost,
   getRecipeDirections,
+  addToCook,
+  getRandomUser,
+  removeFromCook,
 } from "../src/recipes";
 
 import recipeData from "./data/recipes";
 import ingredientsData from "./data/ingredients";
+import usersData from "./data/users";
 
 // Query Selectors
 const resultsContainer = document.querySelector(".results-container");
@@ -22,6 +26,12 @@ const homeButton = document.getElementById("home-button");
 const recipeContainer = document.querySelector(".recipe-container");
 const mainContainer = document.querySelector(".main-container");
 const resultPage = document.querySelector(".result-page");
+const favsButton = document.getElementById("favorites-button");
+const removeFavsButton = document.getElementById("remove-favorites-button");
+
+
+let clickedRecipe;
+let currentUser;
 
 // Event listeners
 
@@ -41,11 +51,26 @@ showAllRecipesBtn.addEventListener("click", function () {
   goToResultsPage();
 });
 
+favsButton.addEventListener("click", function () { 
+  currentUser = getRandomUser();
+  console.log(currentUser)
+  addToCook(clickedRecipe, currentUser);
+  console.log(currentUser.recipesToCook);
+  console.log(currentUser)
+});
+
+removeFavsButton.addEventListener("click", function () {
+  console.log(currentUser)
+  removeFromCook(clickedRecipe, currentUser);
+  console.log(currentUser.recipesToCook);
+  console.log(currentUser)
+});
+
 resultsContainer.addEventListener("click", function (event) {
   const clickedRecipeCard = event.target.closest(".recipe-card");
   if (clickedRecipeCard) {
     const clickedRecipeId = clickedRecipeCard.dataset.recipeId;
-    const clickedRecipe = getRecipeById(clickedRecipeId);
+    clickedRecipe = getRecipeById(clickedRecipeId);
     showRecipePage(clickedRecipe);
   }
 });
@@ -90,6 +115,7 @@ function showRecipePage(recipe) {
     .map((instruction) => `<li>${instruction.instruction}</li>`)
     .join("");
 
+  const totalCost = calculateRecipeCost(recipe, ingredientsData);
   recipeContainer.innerHTML = `
     <section class="recipe-page">
       <img src="${recipe.image}" alt="${recipe.name}" />
@@ -98,6 +124,8 @@ function showRecipePage(recipe) {
       <ul>${ingredientsList}</ul>
       <h3 class="directions">Directions:</h3>
       <ol>${directionsList}</ol>
+      <h3 class="cost">Estimated Total Cost: $${totalCost}</h3>
+
     </section>
   `;
   goToRecipePage();
@@ -140,7 +168,7 @@ function createRecipeCard(recipe) {
 
 function displayFilterByTag(event) {
   const clickedTag = event.target.closest(".tag-btn");
-  console.log(clickedTag.id);
+  //console.log(clickedTag.id);
   if (clickedTag) {
     const tag = clickedTag.id;
     console.log(tag);
@@ -171,6 +199,9 @@ function goBackToMain() {
   resultPage.classList.add("hidden");
   homeButton.classList.add("hidden");
   recipePage.classList.add("hidden");
+  favsButton.classList.add("hidden");
+  removeFavsButton.classList.add("hidden");
+
 }
 
 function goToResultsPage() {
@@ -178,6 +209,9 @@ function goToResultsPage() {
   resultPage.classList.remove("hidden");
   homeButton.classList.remove("hidden");
   recipePage.classList.add("hidden");
+  favsButton.classList.add("hidden");
+  removeFavsButton.classList.add("hidden");
+
 }
 
 function goToRecipePage() {
@@ -185,6 +219,9 @@ function goToRecipePage() {
   resultPage.classList.add("hidden");
   homeButton.classList.remove("hidden");
   recipePage.classList.remove("hidden");
+  favsButton.classList.remove("hidden");
+  removeFavsButton.classList.remove("hidden");
+
 }
 
 export { showAllRecipes, showRecipePage, updateFilteredResults, getRecipeById };
