@@ -4,7 +4,7 @@ import "./styles.css";
 import "./apiCalls";
 import "./images/turing-logo.png";
 import recipeData from "./data/recipes";
-import usersData from "./data/users";
+
 
 // Function Imports
 import { getRandomUser } from "./recipes";
@@ -13,7 +13,4 @@ import {
 } from "./domUpdates";
 
 // OnLoad Function Invocation
-window.addEventListener("load", function () {
-  showRecipes(recipeData);
-  getRandomUser(usersData)
-});
+

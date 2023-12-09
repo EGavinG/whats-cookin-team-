@@ -10,11 +10,11 @@ import {
 
 import recipeData from "./data/recipes";
 import ingredientsData from "./data/ingredients";
+import usersData from "./data/users";
 
 // Query Selectors
 const resultsContainer = document.querySelector(".results-container");
 const recipePage = document.querySelector(".recipe-page");
-const searchInput = document.querySelector(".search-bar input");
 const submitButton = document.getElementById("submitButton");
 const tagsContainer = document.querySelector(".tags");
 const showAllRecipesBtn = document.querySelector(".show-all-btn");
@@ -25,44 +25,56 @@ const resultPage = document.querySelector(".result-page");
 const favsButton = document.getElementById("favorites-button");
 const viewSavedButton = document.getElementById("view-saved-button");
 const removeFavsButton = document.getElementById("remove-favorites-button");
-const searchContainer = document.querySelector(".search-container");
+const recipeCarousel = document.querySelector(".recipe-carousel");
 
 
 let clickedRecipe;
 let currentUser;
+let currentRecipes = [...recipeData];
 
 // Event listeners
+
+window.addEventListener("load", function () {
+  showRecipes(currentRecipes);
+  currentUser = getRandomUser(usersData)
+});
 
 homeButton.addEventListener("click", function () {
   mainView();
 });
 
 submitButton.addEventListener("click", function () {
-  search();
+  search(currentRecipes);
 });
 
 tagsContainer.addEventListener("click", function (event) {
-  displayFilterByTag(event);
+  displayFilterByTag(event, currentRecipes);
 });
 
 showAllRecipesBtn.addEventListener("click", function () {
+  currentRecipes = [...recipeData]; 
+  showRecipes(recipeData);
   resultsView();
 });
 
 favsButton.addEventListener("click", function () { 
-  currentUser = getRandomUser();
+  console.log(currentUser)
   addToCook(clickedRecipe, currentUser);
+  console.log(currentUser);
+  currentRecipes = currentUser.recipesToCook;
 });
 
 viewSavedButton.addEventListener("click", function () {
   savedToCookView();
 });
 
+
 removeFavsButton.addEventListener("click", function () {
   console.log(currentUser)
   removeFromCook(clickedRecipe, currentUser);
   console.log(currentUser.recipesToCook);
   console.log(currentUser)
+  currentRecipes = currentUser.recipesToCook;
 });
 
 resultsContainer.addEventListener("click", function (event) {
@@ -84,12 +96,13 @@ function getIngredientById(id) {
 
 // DOM manipulation functions
 
-function showRecipes(recipes) {
+function showRecipes(recipes = []) {
   recipes.forEach((recipe) => {
     const recipeCard = createRecipeCard(recipe);
     resultsContainer.appendChild(recipeCard);
   });
 }
+
 
 function showRecipePage(recipe) {
   const ingredientsList = recipe.ingredients
@@ -121,14 +134,6 @@ function showRecipePage(recipe) {
   recipeView();
 }
 
-function updateFilteredResults(recipes) {
-  const tags = Array.from(document.querySelectorAll(".tags a"))
-    .filter((tag) => tag.classList.contains("selected"))
-    .map((tag) => tag.innerText);
-
-  const filteredRecipes = filterRecipesByName(recipes, searchInput.value);
-}
-
 function updateResultsContainer(recipes) {
   resultsContainer.innerHTML = "";
 
@@ -156,50 +161,46 @@ function createRecipeCard(recipe) {
   return recipeCard;
 }
 
-function displayFilterByTag(event) {
+function displayFilterByTag(event, recipes) {
   const clickedTag = event.target.closest(".tag-btn");
   if (clickedTag) {
     const tag = clickedTag.id;
-    const filteredRecipesByTag = filterRecipesByTag(recipeData, tag);
+    const filteredRecipesByTag = filterRecipesByTag(currentRecipes, tag);
     updateResultsContainer(filteredRecipesByTag);
     resultsView(); 
   }
 }
 
-function search() {
+function search(recipes) {
   const searchInputValue = document.getElementById("searchInput").value;
-  const filteredRecipes = filterRecipesByName(recipeData, searchInputValue);
+  const filteredRecipes = filterRecipesByName(currentRecipes, searchInputValue);
   updateResultsContainer(filteredRecipes);
   resultsView();
-}
-
-function showFavorites() {
-  currentUser = getRandomUser();
-  console.log(currentUser)
-  
-  console.log(currentUser.recipesToCook);
-  console.log(currentUser)
 }
 
 // Helper Functions
 
 function mainView() {
+  currentRecipes = [...recipeData];
   show(mainContainer);
   hide(resultPage);
   hide(homeButton);
-  hide(recipePage)
-  hide(favsButton)
+  hide(recipePage);
+  hide(favsButton);
   hide(removeFavsButton);
+  show(recipeCarousel);
+  show(showAllRecipesBtn);
 
 }
 
 function resultsView() {
-  hide(mainContainer);
   show(resultPage);
   show(homeButton);
   hide(recipePage);
   hide(favsButton);
   hide(removeFavsButton);
+  hide(recipeCarousel);
+  hide(showAllRecipesBtn);
 
 }
 
@@ -214,8 +215,13 @@ function recipeView() {
 }
 
 function savedToCookView() {
-show(searchContainer);
+  currentRecipes = currentUser.recipesToCook;
+  resultsContainer.innerHTML = "";
+  showRecipes(currentUser.recipesToCook);
+  resultsView();
+  show(mainContainer);
 }
+
 
 function hide(element) {
   element.classList.add('hidden');
@@ -224,4 +230,3 @@ function hide(element) {
 function show(element) {
   element.classList.remove('hidden');
 }
-export { showRecipes, showRecipePage, updateFilteredResults, getRecipeById };
