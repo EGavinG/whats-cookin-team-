@@ -3,20 +3,17 @@
 import "./styles.css";
 import "./apiCalls";
 import "./images/turing-logo.png";
-import ingredientsData from "./data/ingredients";
 import recipeData from "./data/recipes";
 import usersData from "./data/users";
 
 // Function Imports
-import { filterRecipesByTag, filterRecipesByName } from "./recipes";
+import { getRandomUser } from "./recipes";
 import {
   showAllRecipes,
-  showRecipePage,
-  updateFilteredResults,
-  getRecipeById,
 } from "./domUpdates";
 
 // OnLoad Function Invokation
 window.addEventListener("load", function () {
   showAllRecipes(recipeData);
+  getRandomUser(usersData)
 });

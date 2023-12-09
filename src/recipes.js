@@ -1,5 +1,7 @@
 import "./data/recipes";
 import recipeData from "./data/recipes";
+import usersData from "./data/users";
+
 
 // export const findRecipeIngredients = recipe => {
 //   console.log(recipe)
@@ -67,6 +69,35 @@ function getIngredientProperty(ingredientId, ingredientsData, property) {
 function getRecipeDirections(recipe) {
   return recipe.instructions;
 }
+
+//USER STORIES
+//get a random user
+function getRandomUser() {
+  const randomIndex = Math.floor(Math.random() * usersData.length);
+  return usersData[randomIndex];
+}
+
+//on page load this should invoke the function
+
+//functions to add and remove to the list
+function addToCook(recipe, user) {
+  user.recipesToCook.push(recipe);
+}
+
+function removeFromCook(recipe, user) {
+  user.recipesToCook = user.recipesToCook.filter((currentRecipe) => currentRecipe.id !== recipe.id);
+}
+
+/*function filterToCookRecipesByTag(tag) {
+  console.log()
+  return filterRecipesByTag(currentUser.recipesToCook, tag);
+}
+
+function searchToCookRecipesByName(name) {
+  return filterRecipesByName(currentUser.recipesToCook, name);
+}
+*/
+
 export {
   filterRecipesByTag,
   filterRecipesByName,
@@ -74,4 +105,7 @@ export {
   calculateRecipeCost,
   getRecipeDirections,
   getIngredientProperty,
+  getRandomUser,
+  addToCook,
+  removeFromCook,
 };
