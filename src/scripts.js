@@ -9,11 +9,11 @@ import usersData from "./data/users";
 // Function Imports
 import { getRandomUser } from "./recipes";
 import {
-  showAllRecipes,
+  showRecipes,
 } from "./domUpdates";
 
-// OnLoad Function Invokation
+// OnLoad Function Invocation
 window.addEventListener("load", function () {
-  showAllRecipes(recipeData);
+  showRecipes(recipeData);
   getRandomUser(usersData)
 });
