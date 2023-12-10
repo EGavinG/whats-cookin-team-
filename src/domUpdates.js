@@ -8,9 +8,7 @@ import {
   removeFromCook,
 } from "../src/recipes";
 
-import recipeData from "./data/recipes";
-import ingredientsData from "./data/ingredients";
-import usersData from "./data/users";
+import { fetchRecipesData, fetchIngredientsData, fetchUsersData } from "./apiCalls";
 
 // Query Selectors
 const resultsContainer = document.querySelector(".results-container");
@@ -30,13 +28,32 @@ const recipeCarousel = document.querySelector(".recipe-carousel");
 
 let clickedRecipe;
 let currentUser;
-let currentRecipes = [...recipeData];
+let currentRecipes;
+let allFetchedRecipes;
+let allFetchedIngredients;
 
 // Event listeners
 
 window.addEventListener("load", function () {
+  fetchRecipesData()
+  .then(({recipes}) => {
+    allFetchedRecipes = recipes;
+    currentRecipes = recipes;
+    console.log(currentRecipes)
+  })
+  .catch(error => console.error(error));
+  fetchIngredientsData()
+  .then(({ingredients}) => {
+    allFetchedIngredients = ingredients;
+    console.log(allFetchedIngredients)
+  })
+  .catch(error => console.error(error));
+  fetchUsersData()
+  .then(({users}) => {
+    currentUser = getRandomUser(users);
+  });
   showRecipes(currentRecipes);
-  currentUser = getRandomUser(usersData)
+    
 });
 
 homeButton.addEventListener("click", function () {
@@ -52,8 +69,8 @@ tagsContainer.addEventListener("click", function (event) {
 });
 
 showAllRecipesBtn.addEventListener("click", function () {
-  currentRecipes = [...recipeData]; 
-  showRecipes(recipeData);
+  currentRecipes = [...allFetchedRecipes]
+  showRecipes(currentRecipes);
   resultsView();
 });
 
@@ -87,11 +104,11 @@ resultsContainer.addEventListener("click", function (event) {
 });
 
 function getRecipeById(id) {
-  return recipeData.find((recipe) => recipe.id === parseInt(id));
+  return currentRecipes.find((recipe) => recipe.id === parseInt(id));
 }
 
 function getIngredientById(id) {
-  return ingredientsData.find((ingredient) => ingredient.id === parseInt(id));
+  return allFetchedIngredients.find((ingredient) => ingredient.id === parseInt(id));
 }
 
 // DOM manipulation functions
@@ -118,7 +135,7 @@ function showRecipePage(recipe) {
     .map((instruction) => `<li>${instruction.instruction}</li>`)
     .join("");
 
-  const totalCost = calculateRecipeCost(recipe, ingredientsData);
+  const totalCost = calculateRecipeCost(recipe, allFetchedIngredients);
   recipeContainer.innerHTML = `
     <section class="recipe-page">
       <img src="${recipe.image}" alt="${recipe.name}" />
@@ -181,7 +198,6 @@ function search(recipes) {
 // Helper Functions
 
 function mainView() {
-  currentRecipes = [...recipeData];
   show(mainContainer);
   hide(resultPage);
   hide(homeButton);
