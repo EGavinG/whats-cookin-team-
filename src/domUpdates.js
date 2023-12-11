@@ -28,7 +28,7 @@ const favsButton = document.getElementById("favorites-button");
 const viewSavedButton = document.getElementById("view-saved-button");
 const removeFavsButton = document.getElementById("remove-favorites-button");
 const recipeCarousel = document.querySelector(".recipe-carousel");
-const favoriteButton = document.querySelector(".favorite-button");
+// const favoriteButton = document.querySelector(".favorite-button");
 
 let clickedRecipe;
 let currentUser;
@@ -104,9 +104,9 @@ resultsContainer.addEventListener("click", function (event) {
   }
 });
 
-favoriteButton.addEventListener("click", function () {
-  toggleFavorite();
-});
+// favoriteButton.addEventListener("click", function () {
+//   toggleFavorite();
+// });
 
 function getRecipeById(id) {
   return currentRecipes.find((recipe) => recipe.id === parseInt(id));
@@ -120,15 +120,15 @@ function getIngredientById(id) {
 
 // DOM manipulation functions
 
-function toggleFavorite() {
-  favoriteButton.classList.toggle("is-favorite");
+// function toggleFavorite() {
+//   favoriteButton.classList.toggle("is-favorite");
 
-  if (favoriteButton.classList.contains("is-favorite")) {
-    addToCook(clickedRecipe, currentUser);
-  } else {
-    removeFromCook(clickedRecipe, currentUser);
-  }
-}
+//   if (favoriteButton.classList.contains("is-favorite")) {
+//     addToCook(clickedRecipe, currentUser);
+//   } else {
+//     removeFromCook(clickedRecipe, currentUser);
+//   }
+// }
 
 function showRecipes(recipes = []) {
   recipes.forEach((recipe) => {
