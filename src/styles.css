@@ -1,3 +1,11 @@
+/* Color Palette Swatches
+offWhite #ededed
+mustard #f0c030
+adobe red #cc3d3f
+plum red #66232c
+granite gray #313131
+*/
+
 /* Reset some default styles */
 body,
 h1,
@@ -10,16 +18,18 @@ p,
 ul,
 ol,
 li {
+  color: #ededed;
   margin: 0;
   padding: 0;
 }
 
 body {
-  background-color: white;
+  background-color: #66232c;
   font-family: "Playfair Display", serif;
 }
 
 h1 {
+  color: #f0c030;
   text-align: center;
   font-family: "Playball", cursive;
   font-size: 5em;
@@ -31,6 +41,7 @@ h1 {
 }
 
 #app {
+  text-align: center;
   max-width: 800px;
   margin: 0 auto;
   padding: 20px;
@@ -38,8 +49,9 @@ h1 {
 }
 
 .search-container {
+  background-color: #66232c;
   border-radius: 15px;
-  border: 3px solid #000;
+  border: 3px solid #cc3d3f;
   text-align: center;
   margin-bottom: 20px;
   width: 800px;
@@ -52,16 +64,17 @@ h1 {
 .search-bar {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   justify-content: center;
   margin-left: 40px;
 }
 
 input[type="text"] {
+  border-radius: 15px;
+  border: 3px solid #cc3d3f;
   width: 400px;
   padding: 10px;
   font-size: 1em;
-  margin-right: 10px;
 }
 
 .tags {
@@ -77,7 +90,7 @@ ul {
 
 li a {
   text-decoration: none;
-  color: #333;
+  color: #ededed;
 }
 
 .recipe-carousel {
@@ -87,6 +100,8 @@ li a {
 }
 
 .recipe-carousel img {
+  border-radius: 15px;
+  border: 3px solid #cc3d3f;
   width: 30%;
   height: auto;
 }
@@ -102,7 +117,7 @@ li a {
 }
 
 .recipe-card {
-  border: 1px solid #ccc;
+  border: 1px solid #ededed;
   margin: 10px;
   padding: 10px;
   text-align: center;
@@ -119,8 +134,8 @@ li a {
 .recipe-page {
   max-width: 800px;
   margin: 0 auto;
-  background-color: #fff;
-  color: #333;
+  background-color: #313131;
+  color: #f0c030;
   border: 1px solid #ddd;
   border-radius: 8px;
   padding: 20px;
@@ -177,4 +192,190 @@ li a {
 .ingredients,
 .directions {
   margin-top: 20px;
+}
+
+.tag-btn {
+  display: inline-block;
+  padding: 10px 15px;
+  margin: 5px;
+  font-size: 14px;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  border: 2px solid #cc3d3f;
+  color: #ededed;
+  background-color: #cc3d3f;
+  border-radius: 20px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.tag-btn:hover {
+  background-color: #f0c030;
+  border: 2px solid #f0c030;
+  color: #fff;
+}
+
+#submitButton {
+  width: 425px;
+  display: inline-block;
+  padding: 10px 15px;
+  margin: 5px;
+  font-size: 14px;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  border: 2px solid #cc3d3f;
+  color: #ededed;
+  background-color: #cc3d3f;
+  border-radius: 20px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+#submitButton:hover {
+  background-color: #f0c030;
+  border: 2px solid #f0c030;
+  color: #fff;
+}
+
+#show-all-button {
+  width: 425px;
+  display: inline-block;
+  padding: 10px 15px;
+  margin: 5px;
+  font-size: 14px;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  border: 2px solid #cc3d3f;
+  color: #ededed;
+  background-color: #cc3d3f;
+  border-radius: 20px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+#show-all-button:hover {
+  background-color: #f0c030;
+  border: 2px solid #f0c030;
+  color: #fff;
+}
+
+#home-button {
+  width: 345px;
+  padding: 10px 15px;
+  margin: 5px;
+  font-size: 14px;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  border: 2px solid #cc3d3f;
+  color: #ededed;
+  background-color: #cc3d3f;
+  border-radius: 20px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+#home-button:hover {
+  background-color: #f0c030;
+  border: 2px solid #f0c030;
+  color: #fff;
+}
+
+#favorites-button {
+  width: 345px;
+  padding: 10px 15px;
+  margin: 5px;
+  font-size: 14px;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  border: 2px solid #cc3d3f;
+  color: #ededed;
+  background-color: #cc3d3f;
+  border-radius: 20px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+#favorites-button:hover {
+  background-color: #f0c030;
+  border: 2px solid #f0c030;
+  color: #fff;
+}
+
+#remove-favorites-button {
+  width: 345px;
+  padding: 10px 15px;
+  margin: 5px;
+  font-size: 14px;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  border: 2px solid #cc3d3f;
+  color: #ededed;
+  background-color: #cc3d3f;
+  border-radius: 20px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+#remove-favorites-button:hover {
+  background-color: #f0c030;
+  border: 2px solid #f0c030;
+  color: #fff;
+}
+
+#view-saved-button {
+  width: 345px;
+  padding: 10px 15px;
+  margin: 5px;
+  font-size: 14px;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  border: 2px solid #cc3d3f;
+  color: #ededed;
+  background-color: #cc3d3f;
+  border-radius: 20px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+#view-saved-button:hover {
+  background-color: #f0c030;
+  border: 2px solid #f0c030;
+  color: #fff;
+}
+
+.favorite-button {
+  cursor: pointer;
+  border: 0;
+  color: red;
+  background: transparent;
+}
+
+.favorite-button .favorite__icon {
+  height: 60px;
+  width: 60px;
+  opacity: 0;
+  transition: opacity 0.3s, transform 0.3s;
+  transform: scale(0.6);
+  position: absolute;
+}
+
+.favorite-button.is-favorite .favorite--enable {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.favorite-button:not(.is-favorite) .favorite--not {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.is-favorite {
+  color: red;
 }

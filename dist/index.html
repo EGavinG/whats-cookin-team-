@@ -2,20 +2,25 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Playball&family=Playfair+Display&display=swap"
-      rel="stylesheet"
-    />
+    <script src="https://use.fontawesome.com/releases/v5.15.4/js/all.js"></script>
     <title>Hungry?</title>
   </head>
   <body>
     <button id="home-button" class="nav-button hidden">Home</button>
     <button id="favorites-button" class="nav-button hidden">Favorite</button>
-    <button id="remove-favorites-button" class="nav-button hidden">Remove Favorite</button>
-    <button id="view-saved-button" class="nav-button hidden">View Saved Recipes</button>
+    <button id="remove-favorites-button" class="nav-button hidden">
+      Remove Favorite
+    </button>
+    <button id="view-saved-button" class="nav-button hidden">
+      View Saved Recipes
+    </button>
+    <!-- <button type="button" class="favorite-button">
+      <i class="fas fa-heart favorite__icon favorite--enable"></i>
+      <i class="far fa-heart favorite__icon favorite--not"></i>
+    </button> -->
     <div class="main-container">
       <div id="app">
-        <h1>Find a Recipe</h1>
+        <h1>The Meal Plug</h1>
         <div class="search-container">
           <div class="search-bar">
             <h2>Search Bar</h2>
@@ -30,10 +35,15 @@
           </div>
           <div class="tags">
             <h2>Tags</h2>
-              <button type="button" class="tag-btn" id="appetizer">appetizer</button>
-              <button type="button" class="tag-btn" id="side dish">side dish</button>
-              <button type="button" class="tag-btn" id="main dish">main dish</button>
-              
+            <button type="button" class="tag-btn" id="appetizer">
+              appetizer
+            </button>
+            <button type="button" class="tag-btn" id="side dish">
+              side dish
+            </button>
+            <button type="button" class="tag-btn" id="main dish">
+              main dish
+            </button>
           </div>
         </div>
         <section class="recipe-carousel">
@@ -50,7 +60,9 @@
             alt="Placeholder image 3"
           />
         </section>
-        <button type="button" class="show-all-btn">Show All Recipes</button>
+        <button type="button" class="show-all-btn" id="show-all-button">
+          Show All Recipes
+        </button>
       </div>
     </div>
 
