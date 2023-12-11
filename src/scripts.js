@@ -3,7 +3,7 @@
 import "./styles.css";
 import "./apiCalls";
 import "./images/turing-logo.png";
-import recipeData from "./data/recipes";
+
 
 
 // Function Imports

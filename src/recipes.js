@@ -1,5 +1,8 @@
-import "./data/recipes";
-import usersData from "./data/users";
+// import { fetchRecipesData,
+// fetchIngredientsData,
+// fetchUsersData
+// }
+// from "./apiCalls";
 
 function filterRecipesByTag(recipes, tag) {
   const filteredRecipesByTag = recipes.filter((recipe) => {
@@ -13,27 +16,30 @@ function filterRecipesByName(recipes, name) {
     const upperCaseRecipeName = recipe.name.toUpperCase();
     return upperCaseRecipeName.includes(name.toUpperCase());
   });
+  if (!filterRecipesByName) {
+    return 
+  }
   return filteredRecipesByName;
 }
 
-function getIngredientNames(recipe, ingredientsData) {
-  return !recipe || !ingredientsData
+function getIngredientNames(recipe, allFetchedIngredients) {
+  return !recipe || !allFetchedIngredients
     ? "Error"
     : recipe.ingredients.map(
         (ingredient) =>
-          getIngredientProperty(ingredient.id, ingredientsData, "name") ||
+          getIngredientProperty(ingredient.id, allFetchedIngredients, "name") ||
           "Ingredient not found"
       );
 }
 
-function calculateRecipeCost(recipe, ingredientsData) {
+function calculateRecipeCost(recipe, allFetchedIngredients) {
   const totalCost =
-    !recipe || !ingredientsData
+    !recipe || !allFetchedIngredients
       ? 0
       : recipe.ingredients.reduce((acc, ingredient) => {
           const ingredientCost = getIngredientProperty(
             ingredient.id,
-            ingredientsData,
+            allFetchedIngredients,
             "estimatedCostInCents"
           );
           return (
@@ -45,8 +51,8 @@ function calculateRecipeCost(recipe, ingredientsData) {
   return (totalCost / 100).toFixed(2);
 }
 
-function getIngredientProperty(ingredientId, ingredientsData, property) {
-  const ingredientObject = ingredientsData.find(
+function getIngredientProperty(ingredientId, allFetchedIngredients, property) {
+  const ingredientObject = allFetchedIngredients.find(
     (ingredientData) => ingredientData.id === ingredientId
   );
   return ingredientObject ? ingredientObject[property] : null;
@@ -58,13 +64,15 @@ function getRecipeDirections(recipe) {
 
 //USER STORIES
 
-function getRandomUser() {
-  const randomIndex = Math.floor(Math.random() * usersData.length);
-  return usersData[randomIndex];
+function getRandomUser(allFetchedUsers) {
+  const randomIndex = Math.floor(Math.random() * allFetchedUsers.length);
+  return allFetchedUsers[randomIndex];
 }
 
 function addToCook(recipe, user) {
-  user.recipesToCook.push(recipe);
+  if (!user.recipesToCook.includes(recipe)) {
+    user.recipesToCook.push(recipe);
+  }
 }
 
 function removeFromCook(recipe, user) {
