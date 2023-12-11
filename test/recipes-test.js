@@ -97,3 +97,4 @@ describe('calculateRecipeCost', () => {
     expect(cost).to.equal('0.00');
   });
 });
+
