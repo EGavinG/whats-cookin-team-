@@ -1,9 +1,3 @@
-// import { fetchRecipesData,
-// fetchIngredientsData,
-// fetchUsersData
-// }
-// from "./apiCalls";
-
 function filterRecipesByTag(recipes, tag) {
   const filteredRecipesByTag = recipes.filter((recipe) => {
     return recipe.tags.includes(tag);
@@ -61,8 +55,6 @@ function getIngredientProperty(ingredientId, allFetchedIngredients, property) {
 function getRecipeDirections(recipe) {
   return recipe.instructions;
 }
-
-//USER STORIES
 
 function getRandomUser(allFetchedUsers) {
   const randomIndex = Math.floor(Math.random() * allFetchedUsers.length);
