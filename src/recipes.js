@@ -11,7 +11,7 @@ function filterRecipesByName(recipes, name) {
     return upperCaseRecipeName.includes(name.toUpperCase());
   });
   if (!filterRecipesByName) {
-    return 
+    return;
   }
   return filteredRecipesByName;
 }
@@ -68,7 +68,9 @@ function addToCook(recipe, user) {
 }
 
 function removeFromCook(recipe, user) {
-  user.recipesToCook = user.recipesToCook.filter((currentRecipe) => currentRecipe.id !== recipe.id);
+  user.recipesToCook = user.recipesToCook.filter(
+    (currentRecipe) => currentRecipe.id !== recipe.id
+  );
 }
 
 export {

@@ -7,10 +7,11 @@ import {
   removeFromCook,
 } from "../src/recipes";
 
-import { 
-  fetchRecipesData, fetchIngredientsData, fetchUsersData 
-} 
-from "./apiCalls";
+import {
+  fetchRecipesData,
+  fetchIngredientsData,
+  fetchUsersData,
+} from "./apiCalls";
 
 // Query Selectors
 const resultsContainer = document.querySelector(".results-container");
@@ -25,10 +26,9 @@ const resultPage = document.querySelector(".result-page");
 const favsButton = document.getElementById("favorites-button");
 const viewSavedButton = document.getElementById("view-saved-button");
 const removeFavsButton = document.getElementById("remove-favorites-button");
-const searchForm = document.getElementById("searchForm")
+const searchForm = document.getElementById("searchForm");
 
-// Variables 
-
+// Variables
 let clickedRecipe;
 let currentUser;
 let currentRecipes;
@@ -36,27 +36,24 @@ let allFetchedRecipes;
 let allFetchedIngredients;
 
 // Event listeners
-
 window.addEventListener("load", function () {
   fetchRecipesData()
-  .then(({recipes}) => {
-    allFetchedRecipes = recipes;
-    currentRecipes = [...allFetchedRecipes];
-    console.log(currentRecipes)
-  })
-  .catch(error => console.error(error));
+    .then(({ recipes }) => {
+      allFetchedRecipes = recipes;
+      currentRecipes = [...allFetchedRecipes];
+      console.log(currentRecipes);
+    })
+    .catch((error) => console.error(error));
   fetchIngredientsData()
-  .then(({ingredients}) => {
-    allFetchedIngredients = ingredients;
-    console.log(allFetchedIngredients)
-  })
-  .catch(error => console.error(error));
-  fetchUsersData()
-  .then(({users}) => {
+    .then(({ ingredients }) => {
+      allFetchedIngredients = ingredients;
+      console.log(allFetchedIngredients);
+    })
+    .catch((error) => console.error(error));
+  fetchUsersData().then(({ users }) => {
     currentUser = getRandomUser(users);
   });
   showRecipes(currentRecipes);
-    
 });
 
 homeButton.addEventListener("click", function () {
@@ -68,9 +65,9 @@ submitButton.addEventListener("click", function () {
   search(currentRecipes);
 });
 
-searchForm.addEventListener("submit", function(event) {
-event.preventDefault();
-submitButton.click()
+searchForm.addEventListener("submit", function (event) {
+  event.preventDefault();
+  submitButton.click();
 });
 
 tagsContainer.addEventListener("click", function (event) {
@@ -84,8 +81,8 @@ showAllRecipesBtn.addEventListener("click", function () {
   resultsView();
 });
 
-favsButton.addEventListener("click", function () { 
-  console.log(currentUser)
+favsButton.addEventListener("click", function () {
+  console.log(currentUser);
   showFavoriteAlert();
   addToCook(clickedRecipe, currentUser);
   console.log(currentUser);
@@ -98,10 +95,10 @@ viewSavedButton.addEventListener("click", function () {
 
 removeFavsButton.addEventListener("click", function () {
   showRemoveFavoriteAlert();
-  console.log(currentUser)
+  console.log(currentUser);
   removeFromCook(clickedRecipe, currentUser);
   console.log(currentUser.recipesToCook);
-  console.log(currentUser)
+  console.log(currentUser);
   currentRecipes = currentUser.recipesToCook;
 });
 
@@ -115,13 +112,14 @@ resultsContainer.addEventListener("click", function (event) {
 });
 
 // Event Handlers
-
 function getRecipeById(id) {
   return currentRecipes.find((recipe) => recipe.id === parseInt(id));
 }
 
 function getIngredientById(id) {
-  return allFetchedIngredients.find((ingredient) => ingredient.id === parseInt(id));
+  return allFetchedIngredients.find(
+    (ingredient) => ingredient.id === parseInt(id)
+  );
 }
 
 function showRecipes(recipes = []) {
@@ -163,14 +161,14 @@ function showRecipePage(recipe) {
 
 function updateResultsContainer(recipes) {
   resultsContainer.innerHTML = "";
-if (recipes.length > 0) {
-  recipes.forEach((recipe) => {
-    const recipeCard = createRecipeCard(recipe);
-    resultsContainer.appendChild(recipeCard);
-  });
-} else {
-  resultsContainer.innerHTML = "<h1>No results match that criteria!</h1>";
-}
+  if (recipes.length > 0) {
+    recipes.forEach((recipe) => {
+      const recipeCard = createRecipeCard(recipe);
+      resultsContainer.appendChild(recipeCard);
+    });
+  } else {
+    resultsContainer.innerHTML = "<h1>No results match that criteria!</h1>";
+  }
 }
 
 function createRecipeCard(recipe) {
@@ -197,7 +195,7 @@ function displayFilterByTag(event) {
     const tag = clickedTag.id;
     const filteredRecipesByTag = filterRecipesByTag(currentRecipes, tag);
     updateResultsContainer(filteredRecipesByTag);
-    resultsView(); 
+    resultsView();
   }
 }
 
@@ -209,19 +207,19 @@ function search() {
 }
 
 function showFavoriteAlert() {
-  if(!currentUser.recipesToCook.includes(clickedRecipe)) {
-  alert ("Added to favorites");
-} else {
-  alert ("Already added to favorites");
-}
+  if (!currentUser.recipesToCook.includes(clickedRecipe)) {
+    alert("Added to favorites");
+  } else {
+    alert("Already added to favorites");
+  }
 }
 
 function showRemoveFavoriteAlert() {
-  if(currentUser.recipesToCook.includes(clickedRecipe)) {
-  alert ("Removed from favorites");
-} else {
-  alert ("Not found in favorites");
-}
+  if (currentUser.recipesToCook.includes(clickedRecipe)) {
+    alert("Removed from favorites");
+  } else {
+    alert("Not found in favorites");
+  }
 }
 
 // Helper Functions
@@ -234,7 +232,6 @@ function mainView() {
   hide(favsButton);
   hide(removeFavsButton);
   show(showAllRecipesBtn);
-
 }
 
 function resultsView() {
@@ -244,7 +241,6 @@ function resultsView() {
   hide(favsButton);
   hide(removeFavsButton);
   hide(showAllRecipesBtn);
-
 }
 
 function recipeView() {
@@ -265,11 +261,10 @@ function savedToCookView() {
   show(mainContainer);
 }
 
-
 function hide(element) {
-  element.classList.add('hidden');
+  element.classList.add("hidden");
 }
 
 function show(element) {
-  element.classList.remove('hidden');
+  element.classList.remove("hidden");
 }
