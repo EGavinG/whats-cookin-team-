@@ -4,13 +4,8 @@ import "./styles.css";
 import "./apiCalls";
 import "./images/turing-logo.png";
 
-
-
 // Function Imports
 import { getRandomUser } from "./recipes";
-import {
-  showRecipes,
-} from "./domUpdates";
+import { showRecipes } from "./domUpdates";
 
 // OnLoad Function Invocation
-
