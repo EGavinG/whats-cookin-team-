@@ -7,11 +7,7 @@ import {
   removeFromCook,
 } from "../src/recipes";
 
-import {
-  fetchRecipesData,
-  fetchIngredientsData,
-  fetchUsersData,
-} from "./apiCalls";
+import { fetchData } from "./apiCalls";
 
 // Query Selectors
 const resultsContainer = document.querySelector(".results-container");
@@ -37,32 +33,30 @@ let allFetchedIngredients;
 
 // Event listeners
 window.addEventListener("load", function () {
-  fetchRecipesData()
+  fetchData("recipes")
     .then(({ recipes }) => {
       allFetchedRecipes = recipes;
-      currentRecipes = [...allFetchedRecipes];
-      console.log(currentRecipes);
+      console.log(allFetchedRecipes);
     })
     .catch((error) => console.error(error));
-  fetchIngredientsData()
+  fetchData("ingredients")
     .then(({ ingredients }) => {
       allFetchedIngredients = ingredients;
       console.log(allFetchedIngredients);
     })
     .catch((error) => console.error(error));
-  fetchUsersData().then(({ users }) => {
+  fetchData("users").then(({ users }) => {
     currentUser = getRandomUser(users);
   });
-  showRecipes(currentRecipes);
+  showRecipes(allFetchedRecipes);
 });
 
 homeButton.addEventListener("click", function () {
-  currentRecipes = [...allFetchedRecipes];
   mainView();
 });
 
 submitButton.addEventListener("click", function () {
-  search(currentRecipes);
+  search(allFetchedRecipes);
 });
 
 searchForm.addEventListener("submit", function (event) {
@@ -76,8 +70,7 @@ tagsContainer.addEventListener("click", function (event) {
 
 showAllRecipesBtn.addEventListener("click", function () {
   resultsContainer.innerHTML = "";
-  currentRecipes = [...allFetchedRecipes];
-  showRecipes(currentRecipes);
+  showRecipes(allFetchedRecipes);
   resultsView();
 });
 
@@ -113,7 +106,7 @@ resultsContainer.addEventListener("click", function (event) {
 
 // Event Handlers
 function getRecipeById(id) {
-  return currentRecipes.find((recipe) => recipe.id === parseInt(id));
+  return allFetchedRecipes.find((recipe) => recipe.id === parseInt(id));
 }
 
 function getIngredientById(id) {
@@ -193,7 +186,7 @@ function displayFilterByTag(event) {
   const clickedTag = event.target.closest(".tag-btn");
   if (clickedTag) {
     const tag = clickedTag.id;
-    const filteredRecipesByTag = filterRecipesByTag(currentRecipes, tag);
+    const filteredRecipesByTag = filterRecipesByTag(allFetchedRecipes, tag);
     updateResultsContainer(filteredRecipesByTag);
     resultsView();
   }
@@ -201,7 +194,10 @@ function displayFilterByTag(event) {
 
 function search() {
   const searchInputValue = document.getElementById("searchInput").value;
-  const filteredRecipes = filterRecipesByName(currentRecipes, searchInputValue);
+  const filteredRecipes = filterRecipesByName(
+    allFetchedRecipes,
+    searchInputValue
+  );
   updateResultsContainer(filteredRecipes);
   resultsView();
 }

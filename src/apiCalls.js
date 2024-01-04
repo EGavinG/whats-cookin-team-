@@ -20,13 +20,10 @@ function fetchUsersData() {
     .catch((error) => console.log(error));
 }
 
-// function fetchAllData() {
-//   return Promise.all([fetchData('recipes'), fetchData('ingredients'), fetchData('users')]);
-// }
+function fetchData(set) {
+  return fetch(`http://localhost:3001/api/v1/${set}`)
+    .then((response) => response.json())
+    .catch((error) => console.log(error));
+}
 
-export {
-  fetchRecipesData,
-  fetchIngredientsData,
-  fetchUsersData,
-  // fetchAllData
-};
+export { fetchRecipesData, fetchIngredientsData, fetchUsersData, fetchData };
