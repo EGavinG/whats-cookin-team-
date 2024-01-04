@@ -174,7 +174,7 @@ function createRecipeCard(recipe) {
   recipeCard.appendChild(image);
 
   const title = document.createElement("h3");
-  title.textContent = recipe.name;
+  title.textContent = changeTitleCase(recipe.name);
   recipeCard.appendChild(title);
 
   recipeCard.dataset.recipeId = recipe.id;
@@ -263,4 +263,8 @@ function hide(element) {
 
 function show(element) {
   element.classList.remove("hidden");
+}
+
+function changeTitleCase(string) {
+  return string.toLowerCase().split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
 }

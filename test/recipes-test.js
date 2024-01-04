@@ -1,13 +1,7 @@
 import { expect } from 'chai';
 import { filterRecipesByTag, filterRecipesByName, getIngredientNames, calculateRecipeCost, getIngredientProperty } from '../src/recipes';
-import { sampleRecipes } from '../src/data/sample-recipes';
-import { sampleIngredients } from '../src/data/sample-ingredients';
-
-// describe('Recipe', () => {
-//   it('Should be a function', () => {
-//     expect(findRecipeIngredients).to.be.a('function');
-//   });
-// })
+import { sampleRecipes } from '../test/sample-recipes';
+import { sampleIngredients } from '../test/sample-ingredients';
 
 describe('filterRecipesByTag', () => {
   it('should filter recipes by tag', () => {
