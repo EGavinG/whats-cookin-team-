@@ -7,7 +7,7 @@ import {
   removeFromCook,
 } from "../src/recipes";
 
-import { fetchData } from "./apiCalls";
+import { fetchData, postSavedRecipe } from "./apiCalls";
 
 // Query Selectors
 const resultsContainer = document.querySelector(".results-container");
@@ -80,6 +80,7 @@ favsButton.addEventListener("click", function () {
   addToCook(clickedRecipe, currentUser);
   console.log(currentUser);
   currentRecipes = currentUser.recipesToCook;
+  postSavedRecipe(currentUser.id, clickedRecipe.id);
 });
 
 viewSavedButton.addEventListener("click", function () {
