@@ -7,7 +7,7 @@ import {
   removeFromCook,
 } from "../src/recipes";
 
-import { fetchData } from "./apiCalls";
+import { fetchData, postSavedRecipe } from "./apiCalls";
 
 // Query Selectors
 const resultsContainer = document.querySelector(".results-container");
@@ -80,6 +80,7 @@ favsButton.addEventListener("click", function () {
   addToCook(clickedRecipe, currentUser);
   console.log(currentUser);
   currentRecipes = currentUser.recipesToCook;
+  postSavedRecipe(currentUser.id, clickedRecipe.id);
 });
 
 viewSavedButton.addEventListener("click", function () {
@@ -149,6 +150,8 @@ function showRecipePage(recipe) {
 
     </section>
   `;
+  trackRecipeClicks(recipe.name);
+  displayAllClickCounts()
   recipeView();
 }
 
@@ -273,3 +276,26 @@ function changeTitleCase(string) {
     .join(" ");
 }
 
+function trackRecipeClicks(recipeName) {
+  if (!window.recipeClickCounts) {
+      window.recipeClickCounts = {};
+  }
+
+  if (!window.recipeClickCounts[recipeName]) {
+      window.recipeClickCounts[recipeName] = 0;
+  }
+
+  window.recipeClickCounts[recipeName]++;
+  console.log(`Recipe ${recipeName} clicked ${window.recipeClickCounts[recipeName]} times`);
+}
+
+function displayAllClickCounts() {
+  if (window.recipeClickCounts && Object.keys(window.recipeClickCounts).length > 0) {
+      console.log('Click counts for all recipes:');
+      for (const recipeName in window.recipeClickCounts) {
+          console.log(`${recipeName}: ${window.recipeClickCounts[recipeName]} clicks`);
+      }
+  } else {
+      console.log('No recipies clicked yet.'); //ig in theory this probably wont be seen ever, but just in case?
+  }
+}
