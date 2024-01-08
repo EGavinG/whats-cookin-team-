@@ -4,7 +4,6 @@
 #86AF0F accent color 2 avocado green */
 
 body,
-h1,
 h2,
 h3,
 h4,
@@ -14,12 +13,13 @@ p,
 ul,
 ol,
 li {
+  font-family: "Caladea", serif;
   color: #3c422e;
-  margin: 0;
-  padding: 0;
+  margin: 5px;
 }
 
 body {
+  position: center fixed;
   background-color: #f7e6d9;
   font-family: "Familjen Grotesk", serif;
 }
@@ -31,10 +31,35 @@ h1 {
   font-family: "Caladea";
   font-size: 5em;
   margin-bottom: 15px;
+  margin-top: 15px;
 }
 
 .main-container {
-  margin-top: -25px;
+  margin-top: -50px;
+}
+
+.turing-img {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  margin: 5px;
+}
+
+.turing-img img {
+  border-radius: 8px;
+  width: 100px;
+}
+
+.cookin-img {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  margin: 20px;
+}
+
+.cookin-img img {
+  border-radius: 8px;
+  width: 250px;
 }
 
 #app {
@@ -42,7 +67,7 @@ h1 {
   max-width: 800px;
   margin: 0 auto;
   padding: 20px;
-  margin-top: 100px;
+  margin-top: 150px;
 }
 
 .search-container {
@@ -72,12 +97,14 @@ input[type="text"] {
   width: 400px;
   padding: 10px;
   font-size: 1em;
+  margin: 10px;
 }
 
 .tags {
   width: 400px;
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
 ul {
@@ -90,28 +117,17 @@ li a {
   color: #ededed;
 }
 
-.recipe-carousel {
-  margin-bottom: 20px;
-  display: flex;
-  justify-content: space-between;
-}
-
-.recipe-carousel img {
-  border-radius: 15px;
-  border: 3px solid #cc3d3f;
-  width: 30%;
-  height: auto;
-}
-
 .hidden-filtered-results {
   display: none;
 }
 
 .results-container {
+  max-width: 950px; /* Set the desired maximum width */
+  margin: 0 auto; /* Center the container by setting left and right margin to auto */
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
-  margin: 50px;
+  margin-top: 10px; /* Add a top margin if needed */
 }
 
 .recipe-card {
@@ -133,21 +149,21 @@ li a {
 }
 
 .recipe-page {
-  max-width: 800px;
+  max-width: 650px;
   margin: 0 auto;
-  background-color: #38040e;
-  color: #f0c030;
-  border: 1px solid #640d14;
+  background-color: #86af0f;
   border-radius: 20px;
   padding: 20px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .recipe-page img {
   max-width: 100%;
   height: auto;
   border-radius: 8px;
+  margin: 0 auto;
+  display: block;
   margin-bottom: 20px;
+  border: 3px solid #3c422e;
 }
 
 .recipe-page h1 {
@@ -197,6 +213,7 @@ li a {
 
 .button-container {
   text-align: center;
+  margin: 20px;
 }
 
 .nav-button {
@@ -206,11 +223,9 @@ li a {
   text-align: center;
   padding: 0.425em;
   max-width: 50%;
-  width: 10em;
   background: inherit;
   background-clip: padding-box;
   cursor: pointer;
-  position: relative;
   transition: 0.25s ease-out;
   display: none;
   border: none;
@@ -218,8 +233,8 @@ li a {
 }
 
 .nav-button:hover {
-  border: 2.5px solid #3c422e; /* Retaining the original border color */
-  border-radius: 15px; /* Setting border radius to 15px on hover */
+  border: 2.5px solid #3c422e;
+  border-radius: 15px;
 }
 
 .nav-button:not(.hidden) {
@@ -237,6 +252,29 @@ li a {
   padding: 0.425em;
   background: inherit;
   background-clip: padding-box;
+  border-radius: 1em;
+  cursor: pointer;
+  position: relative;
+  transition: 0.25s ease-out;
+  width: auto;
+}
+
+.tag-btn:hover {
+  width: 200px;
+  border: 2.5px solid #3c422e;
+  border-radius: 15px;
+}
+
+#show-all-button {
+  all: unset;
+  color: var(--text-base);
+  font: 700 1.125rem/1.2 Familjen Grotesk, sans-serif;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-align: center;
+  padding: 0.425em;
+  background: inherit;
+  background-clip: padding-box;
   border: 2.5px solid var(--border-color);
   border-radius: 1em;
   cursor: pointer;
@@ -244,7 +282,16 @@ li a {
   transition: 0.25s ease-out;
 }
 
-#show-all-button,
+#show-all-button:hover {
+  border: 2.5px solid #3c422e;
+  border-radius: 15px;
+}
+
+#show-all-button:not(.hidden) {
+  display: inline-block;
+  margin: 0 5px;
+}
+
 #submitButton {
   all: unset;
   color: var(--text-base);
@@ -260,4 +307,11 @@ li a {
   cursor: pointer;
   position: relative;
   transition: 0.25s ease-out;
+  width: auto;
+}
+
+#submitButton:hover {
+  width: 150px;
+  border: 2.5px solid #3c422e;
+  border-radius: 15px;
 }
