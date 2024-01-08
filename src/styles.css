@@ -14,7 +14,8 @@ ul,
 ol,
 li {
   font-family: "Caladea", serif;
-  color: #3c422e;
+  font-weight: 400;
+  color: #141414;
   margin: 5px;
 }
 
@@ -122,12 +123,12 @@ li a {
 }
 
 .results-container {
-  max-width: 950px; /* Set the desired maximum width */
-  margin: 0 auto; /* Center the container by setting left and right margin to auto */
+  max-width: 950px;
+  margin: 0 auto;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
-  margin-top: 10px; /* Add a top margin if needed */
+  margin-top: 10px;
 }
 
 .recipe-card {
@@ -138,6 +139,12 @@ li a {
   cursor: pointer;
   border-radius: 15px;
   background: #86af0f;
+  transition: 0.25s ease-out;
+}
+
+.recipe-card:hover {
+  border: 2.5px solid #3c422e;
+  border-radius: 15px;
 }
 
 .recipe-card img {
@@ -169,13 +176,12 @@ li a {
 .recipe-page h1 {
   font-size: 28px;
   margin-bottom: 10px;
-  color: var(--glow-color);
 }
 
 .recipe-page h4 {
-  font-size: 18px;
+  font-size: 22px;
   margin-bottom: 10px;
-  color: #2e5d95;
+  color: #141414;
 }
 
 .recipe-page ul,
@@ -192,7 +198,7 @@ li a {
   font-size: 22px;
   margin-top: 20px;
   margin-bottom: 10px;
-  color: #2e5d95;
+  color: #141414;
 }
 
 #home-link {
@@ -314,4 +320,20 @@ li a {
   width: 150px;
   border: 2.5px solid #3c422e;
   border-radius: 15px;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+.hr.rounded {
+  border-radius: 15px;
+  border: 3px solid #3c422e;
 }
