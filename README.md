@@ -13,9 +13,9 @@ Using the provided link to the Github repo, an user can clone and pull the repo 
 
 
 ### Preview of App
-![The Meal Plug](https://i.imgur.com/zziEgDZ.png)
-![Sort it out](https://i.imgur.com/9JK3N2l.png)
-![Save your list](https://i.imgur.com/7oN6UBG.png)
+![The Meal Plug]((https://github.com/EGavinG/whats-cookin-team-/assets/68877187/5fdef27e-0c1e-4067-85c1-5a258a61be7f))
+![Sort it out]((https://github.com/EGavinG/whats-cookin-team-/assets/68877187/fcb82e0c-9383-4f24-ad70-c5cf7f352d48))
+![View Recipes](https://github.com/EGavinG/whats-cookin-team-/assets/68877187/30cf686f-1897-4080-8c27-656ab0d95472)
 
 
 ### Context
