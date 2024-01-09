@@ -3,17 +3,25 @@
   <head>
     <meta charset="UTF-8" />
     <script src="https://use.fontawesome.com/releases/v5.15.4/js/all.js"></script>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Caladea:ital,wght@0,400;0,700;1,400;1,700&family=Raleway:wght@100;200;300;400;500;600;700;800&display=swap");
+    </style>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Familjen+Grotesk:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Raleway:wght@100;200;300;400;500;600;700;800&display=swap");
+    </style>
     <title>Hungry?</title>
   </head>
   <body>
-    <button id="home-button" class="nav-button hidden">Home</button>
-    <button id="favorites-button" class="nav-button hidden">Favorite</button>
-    <button id="remove-favorites-button" class="nav-button hidden">
-      Remove Favorite
-    </button>
-    <button id="view-saved-button" class="nav-button hidden">
-      View Saved Recipes
-    </button>
+    <div class="button-container">
+      <button id="home-button" class="nav-button hidden">Home</button>
+      <button id="favorites-button" class="nav-button hidden">Favorite</button>
+      <button id="remove-favorites-button" class="nav-button hidden">
+        Remove Favorite
+      </button>
+      <button id="view-saved-button" class="nav-button hidden">
+        View Saved Recipes
+      </button>
+    </div>
     <div class="main-container">
       <div id="app">
         <h1>The Meal Plug</h1>
@@ -21,10 +29,12 @@
           <div class="search-bar">
             <h2>Hungry?</h2>
             <form id="searchForm">
+              <label for="searchInput" class="visually-hidden">Search for recipes:</label>
               <input
                 type="text"
                 id="searchInput"
                 placeholder="Find something to make"
+                alt="search input bar"
               />
               <button type="submit" id="submitButton">Let's Cook</button>
             </form>
@@ -56,6 +66,19 @@
     <div class="recipe-page hidden">
       <div class="recipe-container"></div>
     </div>
+
+    <div class="turing-img">
+      <div class="image-left">
+        <img src="/images/turing-logo.png" alt="Left Image" />
+      </div>
+    </div>
+
+    <div class="cookin-img">
+      <div class="image-right">
+        <img src="/images/cookin-art.png" alt="Right Image" />
+      </div>
+    </div>
+
     <script src="bundle.js"></script>
   </body>
 </html>

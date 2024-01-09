@@ -3,6 +3,7 @@
 import "./styles.css";
 import "./apiCalls";
 import "./images/turing-logo.png";
+import "./images/cookin-art.png";
 
 // Function Imports
 import { getRandomUser } from "./recipes";

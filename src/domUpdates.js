@@ -142,16 +142,19 @@ function showRecipePage(recipe) {
     <section class="recipe-page">
       <img src="${recipe.image}" alt="${recipe.name}" />
       <h1>${recipe.name}</h1>
+      <hr class="rounded">
       <h4 class="ingredients">Ingredients:</h4>
       <ul>${ingredientsList}</ul>
+      <hr class="rounded">
       <h3 class="directions">Directions:</h3>
       <ol>${directionsList}</ol>
+      <hr class="rounded">
       <h3 class="cost">Estimated Total Cost: $${totalCost}</h3>
 
     </section>
   `;
   trackRecipeClicks(recipe.name);
-  displayAllClickCounts()
+  displayAllClickCounts();
   recipeView();
 }
 
@@ -278,24 +281,31 @@ function changeTitleCase(string) {
 
 function trackRecipeClicks(recipeName) {
   if (!window.recipeClickCounts) {
-      window.recipeClickCounts = {};
+    window.recipeClickCounts = {};
   }
 
   if (!window.recipeClickCounts[recipeName]) {
-      window.recipeClickCounts[recipeName] = 0;
+    window.recipeClickCounts[recipeName] = 0;
   }
 
   window.recipeClickCounts[recipeName]++;
-  console.log(`Recipe ${recipeName} clicked ${window.recipeClickCounts[recipeName]} times`);
+  console.log(
+    `Recipe ${recipeName} clicked ${window.recipeClickCounts[recipeName]} times`
+  );
 }
 
 function displayAllClickCounts() {
-  if (window.recipeClickCounts && Object.keys(window.recipeClickCounts).length > 0) {
-      console.log('Click counts for all recipes:');
-      for (const recipeName in window.recipeClickCounts) {
-          console.log(`${recipeName}: ${window.recipeClickCounts[recipeName]} clicks`);
-      }
+  if (
+    window.recipeClickCounts &&
+    Object.keys(window.recipeClickCounts).length > 0
+  ) {
+    console.log("Click counts for all recipes:");
+    for (const recipeName in window.recipeClickCounts) {
+      console.log(
+        `${recipeName}: ${window.recipeClickCounts[recipeName]} clicks`
+      );
+    }
   } else {
-      console.log('No recipies clicked yet.'); //ig in theory this probably wont be seen ever, but just in case?
+    console.log("No recipies clicked yet."); //ig in theory this probably wont be seen ever, but just in case?
   }
 }
