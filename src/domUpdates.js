@@ -124,6 +124,13 @@ function showRecipes(recipes = []) {
 }
 
 function showRecipePage(recipe) {
+  let clickCount;
+  if (window.recipeClickCounts && window.recipeClickCounts[recipe.name]) {
+    clickCount = window.recipeClickCounts[recipe.name] + 1;
+  } else {
+    clickCount = 1;
+  }
+
   const ingredientsList = recipe.ingredients
     .map(
       (ingredient) =>
@@ -137,11 +144,15 @@ function showRecipePage(recipe) {
     .map((instruction) => `<li>${instruction.instruction}</li>`)
     .join("");
 
+  const clickCountDisplay = `<p>Total Views: ${clickCount}</p>`;
+
   const totalCost = calculateRecipeCost(recipe, allFetchedIngredients);
   recipeContainer.innerHTML = `
     <section class="recipe-page">
       <img src="${recipe.image}" alt="${recipe.name}" />
       <h1>${recipe.name}</h1>
+      <hr class="rounded">
+      ${clickCountDisplay}
       <hr class="rounded">
       <h4 class="ingredients">Ingredients:</h4>
       <ul>${ingredientsList}</ul>
@@ -150,7 +161,8 @@ function showRecipePage(recipe) {
       <ol>${directionsList}</ol>
       <hr class="rounded">
       <h3 class="cost">Estimated Total Cost: $${totalCost}</h3>
-
+ 
+ 
     </section>
   `;
   trackRecipeClicks(recipe.name);
